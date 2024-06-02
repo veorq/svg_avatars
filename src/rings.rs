@@ -26,6 +26,26 @@ const FOUR_DIVIDERS: [f64; 4] = [
     (SQRT_FRAC_1_4 + 0.25) / 2.0,
 ];
 
+/// sqrt(4/5)
+const SQRT_FRAC_4_5: f64 = 0.8944271909999159;
+
+/// sqrt(3/5)
+const SQRT_FRAC_3_5: f64 = 0.7745966692414834;
+
+/// sqrt(2/5)
+const SQRT_FRAC_2_5: f64 = 0.6324555320336759;
+
+/// sqrt(1/5)
+const SQRT_FRAC_1_5: f64 = 0.4472135954999579;
+
+const FIVE_DIVIDERS: [f64; 5] = [
+    1.0,
+    (SQRT_FRAC_4_5 + 0.8) / 2.0,
+    (SQRT_FRAC_3_5 + 0.6) / 2.0,
+    (SQRT_FRAC_2_5 + 0.4) / 2.0,
+    (SQRT_FRAC_1_5 + 0.2) / 2.0,
+];
+
 /// Rings variants control the number of rings generated in avatars.
 #[non_exhaustive]
 #[repr(u8)]
@@ -56,6 +76,7 @@ pub enum Rings {
     ///
     /// [`SvgAvatarBuilder`]: crate::SvgAvatarBuilder
     Four = 4,
+    Five = 5,
 }
 
 impl Rings {
@@ -65,6 +86,7 @@ impl Rings {
             Rings::Two => &TWO_DIVIDERS,
             Rings::Three => &THREE_DIVIDERS,
             Rings::Four => &FOUR_DIVIDERS,
+            Rings::Five => &FIVE_DIVIDERS,
         }
     }
 }
@@ -76,6 +98,7 @@ impl Display for Rings {
             Rings::Two => write!(f, "Two"),
             Rings::Three => write!(f, "Three"),
             Rings::Four => write!(f, "Four"),
+            Rings::Five => write!(f, "Five"),
         }
     }
 }

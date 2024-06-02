@@ -7,7 +7,7 @@ pub(crate) struct SvgTheme<'a> {
 }
 
 impl<'a> SvgTheme<'a> {
-    pub(crate) fn new(hash: &'a [u8; 32], stroke_color: impl Into<String>) -> Self {
+    pub(crate) fn new(hash: &'a [u8; 64], stroke_color: impl Into<String>) -> Self {
         let normalized_ring_themes = hash
             .windows(8)
             .map(Self::calculate_theme)

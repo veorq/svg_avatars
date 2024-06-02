@@ -1,4 +1,3 @@
-//use sha2::{Digest, Sha256};
 use blake3::Hasher;
 use svg::{
     node::element::{path::Data, Group, Path},
@@ -150,10 +149,10 @@ impl SvgAvatarBuilder {
     ///
     /// [`SvgAvatar`]: crate::SvgAvatar
     pub fn build(self) -> SvgAvatar {
-        let hash = self.hasher.finalize();
+        let mut hash = [0; 64];
+        self.hasher.finalize_xof().fill(&mut hash);
 
-        // Safety: This will never panic, as a SHA256 hash has exactly 32 bytes.
-        let hash: [u8; 32] = hash.try_into().unwrap();
+        //let hash: [u8; 32] = hash.try_into().unwrap();
         let theme = SvgTheme::new(&hash, self.stroke_color);
 
         let mut g = Group::new();
