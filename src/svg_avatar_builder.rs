@@ -1,4 +1,5 @@
-use sha2::{Digest, Sha256};
+//use sha2::{Digest, Sha256};
+use blake3::Hasher;
 use svg::{
     node::element::{path::Data, Group, Path},
     Document, Node,
@@ -11,7 +12,8 @@ use crate::{Rings, SvgAvatar, SvgTheme, PATHS_PROPERTIES};
 /// [`SvgAvatar`]: crate::SvgAvatar
 #[derive(Debug, Clone)]
 pub struct SvgAvatarBuilder {
-    hasher: Sha256,
+    //hasher: Sha256,
+    hasher: Hasher,
     rings: Rings,
     stroke_color: String,
 }
@@ -68,7 +70,9 @@ impl SvgAvatarBuilder {
     ///     .identifier_bytes(vec![32u8, 255u8]);
     /// ```
     pub fn identifier_bytes(mut self, data: impl AsRef<[u8]>) -> Self {
-        Digest::update(&mut self.hasher, data.as_ref());
+        self.hasher = Hasher::new(); 
+        self.hasher.update(data.as_ref());
+
         self
     }
 
